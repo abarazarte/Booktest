@@ -49,7 +49,7 @@ exports.update = function(req, res){
     author.lastName = req.body.lastName;
     author.city = req.body.city;
     author.state = req.body.state;
-    auhtor.zip = req.body.zip;
+    author.zip = req.body.zip;
     author.phone = req.body.phone;
 
     author.save(function(err){
