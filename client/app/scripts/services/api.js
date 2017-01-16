@@ -17,31 +17,10 @@
 
     return {
       getAuthors: getAuthorsFn,
+      getAuthor: getAuthorFn,
       addAuthor: addAuthorFn,
-      // getPictureUrl: getPictureUrlFn,
-      // changePassword: changePasswordFn,
-      // getRides: getRidesFn,
-      // getRidesSummary: getRidesSummaryFn,
-      // getReferralContent: getReferralContentFn,
-      // getAchievements: getAchievementsFn,
-      // getAchievementsHistory: getAchievementsHistoryFn,
-      // getMercadoPagoInfo: getMercadoPagoInfoFn,
-      // linkMercadoPagoAccount: linkMercadoPagoAccountFn,
-      // unlinkMercadoPagoAccount: unlinkMercadoPagoAccountFn,
-      // sendContactUsMail: sendContactUsMailFn,
-      // getReferrals: getReferralsFn,
-      // getReferralsCount: getReferralsCountFn,
-      // getCountries: getCountriesFn,
-      // getCities: getCitiesFn,
-      // getControllers: getControllersFn,
-      // getCarMakers: getCarMakersFn,
-      // getCars: getCarsFn,
-      // getYears: getYearsFn,
-      // sendVerificationCode: sendVerificationCodeFn,
-      // editProfile: editProfileFn,
-      // uploadPicture: uploadPictureFn,
-      // updateBankAccountInfo: updateBankAccountInfoFn,
-      // getBanks: getBanksFn
+      editAuthor: editAuthorFn,
+
     };
 
     function getUserIdFromStorageFn(){
@@ -65,10 +44,33 @@
         .then(handleSuccess, handleError('Error getting authors'));
     }
 
+    function getAuthorFn(authorId){
+      return $http({
+        url: AUTHORS_BASE_PATH + URL_SEPARATOR + authorId,
+        method: 'GET',
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error getting author'));
+    }
+
     function addAuthorFn(author){
       return $http({
         url: AUTHORS_BASE_PATH,
         method: 'POST',
+        data: author,
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error adding author'));
+    }
+
+    function editAuthorFn(author){
+      return $http({
+        url: AUTHORS_BASE_PATH + URL_SEPARATOR + author._id,
+        method: 'PUT',
         data: author,
         headers: {
           Authorization: getTokenFromStorageFn()

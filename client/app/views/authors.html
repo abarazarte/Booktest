@@ -24,7 +24,7 @@
     <span>Phone</span>
   </div>
 </div>
-<div class="row authors-list-data" ng-repeat="author in vm.authors track by $index">
+<div class="row authors-list-data" ng-click="vm.editAuthor(author._id)" ng-repeat="author in vm.authors track by $index">
   <div class="col-sm-3 authors-list-column">
     <span>{{author.firstName + ' ' + author.lastName}}</span>
   </div>

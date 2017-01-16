@@ -43,6 +43,11 @@ angular
         controller: 'NewAuthorCtrl',
         controllerAs: 'vm'
       })
+      .when('/authors/:authorId', {
+        templateUrl: 'views/edit_author.html',
+        controller: 'EditAuthorCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,4 +1,4 @@
-<form class="form" name="new_author_form">
+<form class="form" name="edit_author_form">
   <div class="row">
     <div class="col-sm-12 new-author-panel">
       <div class="panel-body">
@@ -57,8 +57,9 @@
   </div>
   <div class="row row-separation">
     <div class="col-sm-12 text-center">
-      <button ladda="vm.loading.save" data-style="slide-left" class="btn btn-success" id="btn_login" ng-click="vm.save()" ng-disabled="edit_author_form.$invalid" type="button">save</button>
+      <button ladda="vm.loading.save" data-style="slide-left" class="btn btn-success" id="btn_login" ng-click="vm.edit()" ng-disabled="edit_author_form.$invalid ||  edit_author_form.$pristine" type="button">save</button>
       <button type="button" class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
     </div>
   </div>
 </form>
+

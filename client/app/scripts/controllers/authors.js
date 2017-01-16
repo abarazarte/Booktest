@@ -14,18 +14,23 @@
   angular.module('clientApp')
     .controller('AuthorsCtrl', authorsCtrlFn);
 
-    function authorsCtrlFn(apiService){
+    function authorsCtrlFn($location, apiService){
       var vm = this;
+
+      vm.editAuthor = editAuthorFn;
 
       vm.authors;
 
       apiService.getAuthors()
         .then(function(data){
           vm.authors = data;
-          console.log(data);
         }, function(error){
           console.log(error);
         })
+
+      function editAuthorFn(authorId){
+        $location.path('/authors/' + authorId);
+      }
     }
 
 })();
