@@ -4,12 +4,19 @@ var tokenService = require('../services/token');
 
 // POST - Login
 exports.login = function(req, res){
-  User.findOne({username: req.body.username.toLowerCase()}, function(err, user){
+    if(!req.headers.authorization){
+        return res
+            .status(401)
+            .send('Token not provided');
+    }
+    var headerString = new Buffer(req.headers.authorization.split(' ')[1], 'base64').toString();
+
+  User.findOne({username: headerString.split(':')[0].toLowerCase()}, function(err, user){
     if(err) return res.status(500).send(err.message);
 
-    if(!user) return res.status(404).send('User:' + req.body.username + ' not found');
+    if(!user) return res.status(404).send('User:' + headerString.split(':')[0] + ' not found');
 
-    if(!user.isValidPassword(req.body.password)) return res.status(401).send('Invalid credentials');
+    if(!user.isValidPassword(headerString.split(':')[1])) return res.status(401).send('Invalid credentials');
 
     return res
         .status(200)
