@@ -3,9 +3,9 @@
     <div class="form-inline">
       <div class="form-group">
         <label for="exampleInputName2">Keywords</label>
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="">
+        <input type="text" class="form-control" id="exampleInputName2" ng-model="vm.searchText" placeholder="">
       </div>
-      <button type="button" class="btn btn-default">Find</button>
+      <!--<button type="button" class="btn btn-default">Find</button>-->
     </div>
   </div>
 </div>
@@ -36,7 +36,7 @@
     <span>Phone</span>
   </div>
 </div>
-<div class="row authors-list-data" ng-repeat="author in vm.authors track by $index">
+<div class="row authors-list-data" ng-repeat="author in vm.authors | filter:vm.searchText track by $index ">
   <div class="col-sm-1">
     <span>
       <input type="checkbox" ng-click="vm.toggleRole(author._id)" ng-checked="vm.selected.indexOf(author._id) > -1" aria-label="...">
