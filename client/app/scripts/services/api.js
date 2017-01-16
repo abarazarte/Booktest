@@ -13,6 +13,7 @@
     var URL_SEPARATOR = '/';
     var QUERY_PARAM_SEPARATOR = '&';
     var AUTHORS_BASE_PATH = API_BASE_PATH + 'authors';
+    var BOOKS_BASE_PATH = API_BASE_PATH + 'books';
 
 
     return {
@@ -20,7 +21,11 @@
       getAuthor: getAuthorFn,
       addAuthor: addAuthorFn,
       editAuthor: editAuthorFn,
-      deleteSelectedAuthors: deleteSelectedFn
+      deleteSelectedAuthors: deleteSelectedAuthorsFn,
+      getBookGenres: getBookGenresFn,
+      getBooks: getBooksFn,
+      addBook: addBookFn,
+      deleteSelectedBooks: deleteSelectedBooksFn
     };
 
     function getUserIdFromStorageFn(){
@@ -78,12 +83,61 @@
         .then(handleSuccess, handleError('Error adding author'));
     }
 
-    function deleteSelectedFn(selected){
-      console.log(selected);
-
+    function deleteSelectedAuthorsFn(selected){
       var promises = selected.map(function(author){
         return $http({
           url: AUTHORS_BASE_PATH + URL_SEPARATOR + author,
+          method: 'DELETE',
+          headers: {
+            Authorization: getTokenFromStorageFn()
+          }
+        });
+      });
+
+      return $q.all(promises)
+        .then(handleSuccess, handleError('Error deleting selected authors'));
+
+
+    }
+
+    function getBookGenresFn(){
+      return $http({
+        url: BOOKS_BASE_PATH + URL_SEPARATOR + 'genres',
+        method: 'GET',
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error adding book'));
+    }
+
+    function getBooksFn(){
+      return $http({
+        url: BOOKS_BASE_PATH,
+        method: 'GET',
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error adding book'));
+    }
+
+    function addBookFn(book){
+      return $http({
+        url: BOOKS_BASE_PATH,
+        method: 'POST',
+        data: book,
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error adding book'));
+    }
+
+    function deleteSelectedBooksFn(selected){
+      var promises = selected.map(function(book){
+        return $http({
+          url: BOOKS_BASE_PATH + URL_SEPARATOR + book,
           method: 'DELETE',
           headers: {
             Authorization: getTokenFromStorageFn()

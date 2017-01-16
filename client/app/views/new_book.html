@@ -1,0 +1,70 @@
+<form class="form" name="new_author_form">
+  <div class="row">
+    <div class="col-sm-12 new-author-panel">
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="row">
+            <div class="form-group">
+              <label for="title" class="col-sm-2 control-label">Name*:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" ng-model="vm.book.title" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="authors" class="col-sm-2 control-label">Author(s):</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="authors" ng-model="vm.book.authors" required multiple>
+                  <option value="" disabled selected></option>
+                  <option value="genre" ng-repeat="author in vm.authors track by $index" ng-value="author._id">{{author.firstName + ' ' + author.lastName}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="genre" class="col-sm-2 control-label">Genre:</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="genre" ng-model="vm.book.genre">
+                  <option value="" disabled selected></option>
+                  <option ng-value="genre" ng-repeat="genre in vm.genres track by $index">{{genre}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="publicatioNDate" class="col-sm-2 control-label">Publication date:</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="publicatioNDate" ng-model="vm.book.publicationDate" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="publisher" class="col-sm-2 control-label">Publisher:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="publisher" ng-model="vm.book.publisher" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="phone" class="col-sm-2 control-label">Price:</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="phone" ng-model="vm.book.price" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-separation">
+    <div class="col-sm-12 text-center">
+      <button ladda="vm.loading.save" data-style="slide-left" class="btn btn-success" id="btn_login" ng-click="vm.save()" ng-disabled="edit_author_form.$invalid" type="button">Save</button>
+      <button type="button" class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+    </div>
+  </div>
+</form>

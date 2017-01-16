@@ -48,6 +48,16 @@ angular
         controller: 'EditAuthorCtrl',
         controllerAs: 'vm'
       })
+      .when('/books', {
+        templateUrl: 'views/books.html',
+        controller: 'BooksCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/books/new', {
+        templateUrl: 'views/new_book.html',
+        controller: 'NewBookCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });
