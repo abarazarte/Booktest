@@ -58,6 +58,11 @@ angular
         controller: 'NewBookCtrl',
         controllerAs: 'vm'
       })
+      .when('/books/:bookId', {
+        templateUrl: 'views/edit_book.html',
+        controller: 'EditBookCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

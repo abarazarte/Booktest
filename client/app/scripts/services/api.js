@@ -25,7 +25,9 @@
       getBookGenres: getBookGenresFn,
       getBooks: getBooksFn,
       addBook: addBookFn,
-      deleteSelectedBooks: deleteSelectedBooksFn
+      deleteSelectedBooks: deleteSelectedBooksFn,
+      getBook: getBookFn,
+      editBook: editBookFn
     };
 
     function getUserIdFromStorageFn(){
@@ -149,6 +151,29 @@
         .then(handleSuccess, handleError('Error deleting selected authors'));
 
 
+    }
+
+    function getBookFn(bookId){
+      return $http({
+        url: BOOKS_BASE_PATH + URL_SEPARATOR + bookId,
+        method: 'GET',
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error getting book'));
+    }
+
+    function editBookFn(book){
+      return $http({
+        url: BOOKS_BASE_PATH + URL_SEPARATOR + book._id,
+        method: 'PUT',
+        data: book,
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error adding author'));
     }
 
     function handleSuccess(response){

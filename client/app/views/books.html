@@ -39,15 +39,15 @@
       <input type="checkbox" ng-click="vm.toggleRole(book._id)" ng-checked="vm.selected.indexOf(book._id) > -1" aria-label="...">
     </span>
   </div>
-  <div class="col-sm-4 authors-list-column" ng-click="vm.editAuthor(book._id)">
+  <div class="col-sm-4 authors-list-column" ng-click="vm.editBook(book._id)">
     <span>{{book.title}}</span>
   </div>
-  <div class="col-sm-4 authors-list-column" ng-click="vm.editAuthor(book._id)">
+  <div class="col-sm-4 authors-list-column" ng-click="vm.editBook(book._id)">
     <ul>
       <li ng-repeat="author in book.authors track by $index">{{author.firstName + ' ' + author.lastName}}</li>
     </ul>
   </div>
-  <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(book._id)">
+  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
     <span>{{book.publicationDate | date:'MM/dd/yyyy'}}</span>
   </div>
 </div>
