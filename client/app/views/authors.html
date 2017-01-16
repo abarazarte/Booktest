@@ -10,31 +10,48 @@
   </div>
 </div>
 
+<div class="row row-separation">
+  <div class="col-sm-12">
+    <button class="btn btn-success" id="btn_login" ng-click="vm.createAuthor()"  type="button">Create new</button>
+    <button type="button" class="btn btn-default" ng-click="vm.toggleRole('ALL')">
+      <span ng-if="!vm.allSelected">Select all</span>
+      <span ng-if="vm.allSelected">Deselect all</span>
+    </button>
+    <button ladda="vm.loading.delete" data-style="slide-left" type="button" class="btn btn-default" ng-click="vm.deleteSelected()">Delete selected</button>
+  </div>
+</div>
+
 <div class="row row-separation authors-list-header">
+  <div class="col-sm-1"></div>
   <div class="col-sm-3 authors-list-column">
     <span>Name</span>
   </div>
   <div class="col-sm-3 authors-list-column">
     <span>City</span>
   </div>
-  <div class="col-sm-3 authors-list-column">
+  <div class="col-sm-2 authors-list-column">
     <span>State</span>
   </div>
   <div class="col-sm-3 authors-list-column">
     <span>Phone</span>
   </div>
 </div>
-<div class="row authors-list-data" ng-click="vm.editAuthor(author._id)" ng-repeat="author in vm.authors track by $index">
-  <div class="col-sm-3 authors-list-column">
+<div class="row authors-list-data" ng-repeat="author in vm.authors track by $index">
+  <div class="col-sm-1">
+    <span>
+      <input type="checkbox" ng-click="vm.toggleRole(author._id)" ng-checked="vm.selected.indexOf(author._id) > -1" aria-label="...">
+    </span>
+  </div>
+  <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
     <span>{{author.firstName + ' ' + author.lastName}}</span>
   </div>
-  <div class="col-sm-3 authors-list-column">
+  <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
     <span>{{author.city}}</span>
   </div>
-  <div class="col-sm-3 authors-list-column">
+  <div class="col-sm-2 authors-list-column" ng-click="vm.editAuthor(author._id)">
     <span>{{author.state}}</span>
   </div>
-  <div class="col-sm-3 authors-list-column">
+  <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
     <span>{{author.phone}}</span>
   </div>
 </div>

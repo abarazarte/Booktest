@@ -9,7 +9,7 @@
   angular.module('clientApp')
     .service('apiService', apiServiceFn);
 
-  function apiServiceFn($http, API_BASE_PATH, store){
+  function apiServiceFn($http, $q, API_BASE_PATH, store){
     var URL_SEPARATOR = '/';
     var QUERY_PARAM_SEPARATOR = '&';
     var AUTHORS_BASE_PATH = API_BASE_PATH + 'authors';
@@ -20,7 +20,7 @@
       getAuthor: getAuthorFn,
       addAuthor: addAuthorFn,
       editAuthor: editAuthorFn,
-
+      deleteSelectedAuthors: deleteSelectedFn
     };
 
     function getUserIdFromStorageFn(){
@@ -31,7 +31,6 @@
       var token = store.get('client_token');
       return token.tokenType + ' ' + token.token;
     }
-
 
     function getAuthorsFn(){
       return $http({
@@ -77,6 +76,25 @@
         }
       })
         .then(handleSuccess, handleError('Error adding author'));
+    }
+
+    function deleteSelectedFn(selected){
+      console.log(selected);
+
+      var promises = selected.map(function(author){
+        return $http({
+          url: AUTHORS_BASE_PATH + URL_SEPARATOR + author,
+          method: 'DELETE',
+          headers: {
+            Authorization: getTokenFromStorageFn()
+          }
+        });
+      });
+
+      return $q.all(promises)
+        .then(handleSuccess, handleError('Error deleting selected authors'));
+
+
     }
 
     function handleSuccess(response){
