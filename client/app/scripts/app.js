@@ -63,6 +63,11 @@ angular
         controller: 'EditBookCtrl',
         controllerAs: 'vm'
       })
+      .when('/reports/revenue', {
+        templateUrl: 'views/revenue_report.html',
+        controller: 'RevenueReportCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-9">
+    <div class="form-inline">
+      <div class="form-group">
+        <label for="from">From</label>
+        <input type="date" class="form-control" id="from" ng-model="vm.from" placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="to">To:</label>
+        <input type="date" class="form-control" id="to" ng-model="vm.to" placeholder="">
+      </div>
+      <button type="button" class="btn btn-default">Find</button>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <button type="button" class="btn btn-default">Generate randoms sales</button>
+  </div>
+</div>
+
+<div class="row row-flex row-separation authors-list-header">
+  <div class="col-sm-3 authors-list-column">
+    <span>Author name</span>
+  </div>
+  <div class="col-sm-3 authors-list-column">
+    <span># of titles</span>
+  </div>
+  <div class="col-sm-3 authors-list-column">
+    <span>Revenue ($)</span>
+  </div>
+  <div class="col-sm-3 authors-list-column">
+    <span>Avg Revenue ($/title)</span>
+  </div>
+</div>
+<div class="row row-flex authors-list-data" ng-repeat="book in vm.books | filter:vm.searchText track by $index ">
+  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
+    <span>{{book.title}}</span>
+  </div>
+  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
+    <ul>
+      <li ng-repeat="author in book.authors track by $index">{{author.firstName + ' ' + author.lastName}}</li>
+    </ul>
+  </div>
+  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
+    <span>{{book.publicationDate | date:'MM/dd/yyyy'}}</span>
+  </div>
+  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
+    <span>{{book.publicationDate | date:'MM/dd/yyyy'}}</span>
+  </div>
+</div>
