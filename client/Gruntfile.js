@@ -465,38 +465,15 @@ module.exports = function (grunt) {
       },
       dev: {
         constants: {
-          API_BASE_PATH: 'https://api-dev.nekso.io/v1/',
-          GOOGLE_API_KEY: 'AIzaSyDynT53OB1ERPxHbKGhYb2R1OfH3G4bLjg',
-          LINKS: {
-          }
+          API_BASE_PATH: 'http://localhost:3000/api/v1/'
         }
       },
       local: {
         constants: {
-          API_BASE_PATH: 'https://api-dev.nekso.io/v1/',
-          GOOGLE_API_KEY: '',
-          LINKS: {
-          }
-        }
-      },
-      prod: {
-        constants: {
-          API_BASE_PATH: 'https://api.nekso.io/v1/',
-          GOOGLE_API_KEY: 'AIzaSyAG2zppmghobBPHfbvQRUBnjDh9XfwxeOc',
-          LINKS: {
-          }
-        }
-      },
-      qa: {
-        constants: {
-          API_BASE_PATH: 'https://api-qa.nekso.io/v1/',
-          GOOGLE_API_KEY: 'AIzaSyDynT53OB1ERPxHbKGhYb2R1OfH3G4bLjg',
-          LINKS: {
-          }
+          API_BASE_PATH: 'http://localhost:3000/api/v1/'
         }
       }
     }
-
   });
 
 
