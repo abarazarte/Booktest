@@ -38,6 +38,11 @@ angular
         controller: 'AuthorsCtrl',
         controllerAs: 'vm'
       })
+      .when('/authors/new', {
+        templateUrl: 'views/new_author.html',
+        controller: 'NewAuthorCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

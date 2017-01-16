@@ -1,0 +1,64 @@
+<form class="form" name="new_author_form">
+  <div class="row">
+    <div class="col-sm-12 new-author-panel">
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="row">
+            <div class="form-group">
+              <label for="firstName" class="col-sm-2 control-label">First name*:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="firstName" ng-model="vm.author.firstName" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="lastName" class="col-sm-2 control-label">Last name*:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="lastName" ng-model="vm.author.lastName" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="city" class="col-sm-2 control-label">City:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="city" ng-model="vm.author.city" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="state" class="col-sm-2 control-label">State:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="state" ng-model="vm.author.state" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="zip" class="col-sm-2 control-label">Zip:</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="zip" ng-model="vm.author.zip" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="phone" class="col-sm-2 control-label">Phone:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="phone" ng-model="vm.author.phone" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-separation">
+    <div class="col-sm-12 text-center">
+      <button  ladda="vm.loading.save" data-style="slide-left" class="btn btn-success" id="btn_login" ng-click="vm.save()" ng-disabled="new_author_form.$invalid" type="button">save</button>
+      <button type="button" class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+    </div>
+  </div>
+</form>

@@ -17,6 +17,7 @@
 
     return {
       getAuthors: getAuthorsFn,
+      addAuthor: addAuthorFn,
       // getPictureUrl: getPictureUrlFn,
       // changePassword: changePasswordFn,
       // getRides: getRidesFn,
@@ -62,6 +63,18 @@
         }
       })
         .then(handleSuccess, handleError('Error getting authors'));
+    }
+
+    function addAuthorFn(author){
+      return $http({
+        url: AUTHORS_BASE_PATH,
+        method: 'POST',
+        data: author,
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error adding author'));
     }
 
     function handleSuccess(response){
