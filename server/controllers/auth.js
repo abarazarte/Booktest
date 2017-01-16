@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var User = require('../models/user');
 var tokenService = require('../services/token');
 
-// POST - Login
+// GET - Login / get token
 exports.login = function(req, res){
     if(!req.headers.authorization){
         return res

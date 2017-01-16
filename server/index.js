@@ -19,7 +19,7 @@ app.use(methodOverride());
 // Auth endpoints
 var auth = express.Router();
 auth.route('/login')
-    .post(AuthCtrl.login);
+    .get(AuthCtrl.login);
 
 auth.route('/signup')
     .post(AuthCtrl.signup);
