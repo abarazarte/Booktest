@@ -7,10 +7,7 @@ var Schema = mongoose.Schema;
     city:  { type: String },
     state:  { type: String },
     zip:  { type: Number },
-    phone:  { type: String },
-    status: { type: String, enum:
-        ['OK', 'ARCHIVED'], default: 'OK'
-    }
+    phone:  { type: String }
   });
 
 module.exports = mongoose.model('Author', authorSchema);
