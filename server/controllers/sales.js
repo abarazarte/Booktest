@@ -8,24 +8,26 @@ var Sale = require('../models/sales');
 //GET - Sales
 exports.findAll = function(req, res){
     Sale.aggregate([
-        {
-            $lookup:
-                {
-                    from: "books",
-                    localField: "book",
-                    foreignField: "_id",
-                    as: "book"
-                }
-        },
         {$unwind: '$book'},
         {
             $lookup:
-                {
-                    from: "authors",
-                    localField: "book.authors",
-                    foreignField: "_id",
-                    as: "book.authors"
-                }
+            {
+                from: "books",
+                localField: "book",
+                foreignField: "_id",
+                as: "book"
+            }
+        },
+        {$unwind: '$book'},
+        {$unwind: '$book.authors'},
+        {
+            $lookup:
+            {
+                from: "authors",
+                localField: "book.authors",
+                foreignField: "_id",
+                as: "book.authors"
+            }
         },
         {$unwind: '$book.authors'},
         {
@@ -33,7 +35,7 @@ exports.findAll = function(req, res){
                 _id : '$book.authors',
                 revenue: { $sum: '$book.price' },
                 count: { $sum: 1 },
-                avg: { $avg: '$book.price' },
+                avg: { $avg: '$book.price' }
             }
         }
     ], function (err, _sales) {
