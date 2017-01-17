@@ -173,3 +173,24 @@ body {
 .row-flex{
   display: flex;
 }
+
+.z-index2{
+  z-index: 2;
+}
+
+.mobile-table-row{
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #414141;
+  border: 1px solid #666;
+}
+.center-checkbox{
+  display: flex;
+  align-items: center;
+}
+.padding-15{
+  padding-left: 15px;
+}

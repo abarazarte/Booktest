@@ -30,42 +30,97 @@
   </div>
 </div>
 
-<div class="row row-flex row-separation authors-list-header">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-3 authors-list-column">
-    <span>Name</span>
+<div class="hidden-xs">
+  <div class="row row-flex row-separation authors-list-header">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-3 authors-list-column">
+      <span>Name</span>
+    </div>
+    <div class="col-sm-3 authors-list-column">
+      <span>City</span>
+    </div>
+    <div class="col-sm-2 authors-list-column">
+      <span>State</span>
+    </div>
+    <div class="col-sm-3 authors-list-column">
+      <span>Phone</span>
+    </div>
   </div>
-  <div class="col-sm-3 authors-list-column">
-    <span>City</span>
-  </div>
-  <div class="col-sm-2 authors-list-column">
-    <span>State</span>
-  </div>
-  <div class="col-sm-3 authors-list-column">
-    <span>Phone</span>
+  <div class="authors-data">
+    <div class="row row-flex authors-list-data" ng-repeat="author in vm.authors | filter:vm.searchText track by $index ">
+      <div class="col-sm-1">
+        <span>
+          <input type="checkbox" ng-click="vm.toggleRole(author._id)" ng-checked="vm.selected.indexOf(author._id) > -1" aria-label="...">
+        </span>
+      </div>
+      <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
+        <span>{{author.firstName + ' ' + author.lastName}}</span>
+      </div>
+      <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
+        <span>{{author.city}}</span>
+      </div>
+      <div class="col-sm-2 authors-list-column" ng-click="vm.editAuthor(author._id)">
+        <span>{{author.state}}</span>
+      </div>
+      <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
+        <span>{{author.phone}}</span>
+      </div>
+    </div>
   </div>
 </div>
-<div class="authors-data">
-  <div class="row row-flex authors-list-data" ng-repeat="author in vm.authors | filter:vm.searchText track by $index ">
-    <div class="col-sm-1">
-    <span>
-      <input type="checkbox" ng-click="vm.toggleRole(author._id)" ng-checked="vm.selected.indexOf(author._id) > -1" aria-label="...">
-    </span>
+
+<div class="hidden-lg hidden-md hidden-sm">
+  <div class="row row-flex mobile-table-row" ng-repeat="author in vm.authors | filter:vm.searchText track by $index ">
+    <div class="col-xs-2 center-checkbox">
+        <span>
+          <input type="checkbox" ng-click="vm.toggleRole(author._id)" ng-checked="vm.selected.indexOf(author._id) > -1" aria-label="...">
+        </span>
     </div>
-    <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
-      <span>{{author.firstName + ' ' + author.lastName}}</span>
-    </div>
-    <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
-      <span>{{author.city}}</span>
-    </div>
-    <div class="col-sm-2 authors-list-column" ng-click="vm.editAuthor(author._id)">
-      <span>{{author.state}}</span>
-    </div>
-    <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
-      <span>{{author.phone}}</span>
+    <div class="col-xs-10" ng-click="vm.editAuthor(author._id)">
+      <div class="row">
+        <div class="col-xs-6">
+          <span>
+            <strong>Name:</strong>
+          </span>
+        </div>
+        <div class="col-xs-6">
+          <span>{{author.firstName + ' ' + author.lastName}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <span>
+            <strong>City:</strong>
+          </span>
+        </div>
+        <div class="col-xs-6">
+          <span>{{author.city}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <span>
+            <strong>State:</strong>
+          </span>
+        </div>
+        <div class="col-xs-6">
+          <span>{{author.state}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <span>
+            <strong>Phone</strong>
+          </span>
+        </div>
+        <div class="col-xs-6">
+          <span>{{author.phone}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 
 <div class="row row-separation">
   <div class="col-sm-12 text-center">

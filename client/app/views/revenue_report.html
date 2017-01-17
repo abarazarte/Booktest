@@ -5,7 +5,7 @@
         <p class="input-group date-box has-feedback">
           <input date-range-picker class="form-control date-picker font-11 inside-search-icon" type="text"
                  ng-model="vm.filter.date" options="vm.filter.date.opts" required/>
-          <i class="glyphicon glyphicon-calendar form-control-feedback no-zindex"></i>
+          <i class="glyphicon glyphicon-calendar form-control-feedback z-index2"></i>
         </p>
       </div>
       <button ladda="vm.loading.report" data-style="slide-left" type="button" class="btn btn-default" ng-click="vm.getReport()">Find</button>
@@ -16,31 +16,92 @@
   </div>
 </div>
 
-<div class="row row-flex row-separation authors-list-header">
-  <div class="col-sm-3 authors-list-column">
-    <span>Author name</span>
+<div class="hidden-xs">
+  <div class="row row-flex row-separation authors-list-header">
+    <div class="col-sm-3 authors-list-column">
+      <span>
+        <strong>Author name</strong>
+      </span>
+    </div>
+    <div class="col-sm-3 authors-list-column">
+      <span>
+        <strong># of titles</strong>
+      </span>
+    </div>
+    <div class="col-sm-3 authors-list-column">
+      <span>
+        <strong>Revenue ($)</strong>
+      </span>
+    </div>
+    <div class="col-sm-3 authors-list-column">
+      <span>
+        <strong>Avg Revenue ($/title)</strong>
+      </span>
+    </div>
   </div>
-  <div class="col-sm-3 authors-list-column">
-    <span># of titles</span>
-  </div>
-  <div class="col-sm-3 authors-list-column">
-    <span>Revenue ($)</span>
-  </div>
-  <div class="col-sm-3 authors-list-column">
-    <span>Avg Revenue ($/title)</span>
+  <div class="row row-flex authors-list-data" ng-repeat="sale in vm.sales track by $index ">
+    <div class="col-sm-3 authors-list-column" ng-click="vm.redirectTo('/authors/' + sale._id._id)">
+      <span>{{sale._id.firstName + '' + sale._id.lastName}}</span>
+    </div>
+    <div class="col-sm-3 authors-list-column">
+      <span>{{sale.count}}</span>
+    </div>
+    <div class="col-sm-3 authors-list-column">
+      <span>{{sale.revenue}}</span>
+    </div>
+    <div class="col-sm-3 authors-list-column">
+      <span>{{sale.avg | number : 2}}</span>
+    </div>
   </div>
 </div>
-<div class="row row-flex authors-list-data" ng-repeat="sale in vm.sales track by $index ">
-  <div class="col-sm-3 authors-list-column" ng-click="vm.redirectTo('/authors/' + sale._id._id)">
-    <span>{{sale._id.firstName + '' + sale._id.lastName}}</span>
-  </div>
-  <div class="col-sm-3 authors-list-column">
-    <span>{{sale.count}}</span>
-  </div>
-  <div class="col-sm-3 authors-list-column">
-    <span>{{sale.revenue}}</span>
-  </div>
-  <div class="col-sm-3 authors-list-column">
-    <span>{{sale.avg | number : 2}}</span>
+<div class="hidden-lg hidden-md hidden-sm">
+  <div class="row mobile-table-row" ng-repeat="sale in vm.sales track by $index ">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-xs-6">
+          <span>
+            <strong>
+              Author name:
+            </strong>
+          </span>
+        </div>
+        <div class="col-xs-6" ng-click="vm.redirectTo('/authors/' + sale._id._id)">
+          <span>{{sale._id.firstName + '' + sale._id.lastName}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <span>
+            <strong># of titles:</strong>
+          </span>
+        </div>
+        <div class="col-xs-6">
+          <span>{{sale.count}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <span>
+            <strong>
+              Revenue ($):
+            </strong>
+          </span>
+        </div>
+        <div class="col-xs-6">
+          <span>{{sale.revenue}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <span>
+            <strong>Avg Revenue ($/title):</strong>
+          </span>
+        </div>
+        <div class="col-xs-6">
+          <span>{{sale.avg | number : 2}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
