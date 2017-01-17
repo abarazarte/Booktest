@@ -21,6 +21,7 @@
     vm.logout = logoutFn;
     vm.closeLogoutModal = closeLogoutModalFn;
     vm.isLoggedIn = isLoggedInFn;
+    vm.changeLocationTo = changeLocationToFn;
 
     function openLogoutModalFn(){
       $('#logout-popup').addClass('animated fadeIn');
@@ -43,6 +44,10 @@
     function isLoggedInFn(){
       var token = utilService.isLoggedIn() || {};
       return angular.isDefined(token.userId) && !$rootScope.loginInProgress;
+    }
+
+    function changeLocationToFn(location){
+      $location.path(location);
     }
 
   }
