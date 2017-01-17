@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="col-sm-3">
-    <button type="button" class="btn btn-default">Generate randoms sales</button>
+    <button type="button" class="btn btn-default" ng-click="vm.generateRandomData()">Generate randoms sales</button>
   </div>
 </div>
 
@@ -31,19 +31,17 @@
     <span>Avg Revenue ($/title)</span>
   </div>
 </div>
-<div class="row row-flex authors-list-data" ng-repeat="book in vm.books | filter:vm.searchText track by $index ">
+<div class="row row-flex authors-list-data" ng-repeat="sale in vm.sales track by $index ">
   <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
-    <span>{{book.title}}</span>
+    <span>{{sale._id.firstName + '' + sale._id.lastName}}</span>
   </div>
   <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
-    <ul>
-      <li ng-repeat="author in book.authors track by $index">{{author.firstName + ' ' + author.lastName}}</li>
-    </ul>
+    <span>{{sale.count}}</span>
   </div>
   <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
-    <span>{{book.publicationDate | date:'MM/dd/yyyy'}}</span>
+    <span>{{sale.revenue}}</span>
   </div>
   <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
-    <span>{{book.publicationDate | date:'MM/dd/yyyy'}}</span>
+    <span>{{sale.avg | number : 2}}</span>
   </div>
 </div>

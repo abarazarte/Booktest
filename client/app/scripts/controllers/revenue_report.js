@@ -12,73 +12,36 @@
    * Controller of the clientApp
    */
   angular.module('clientApp')
-    .controller('RevenueReportCtrl', booksCtrlFn);
+    .controller('RevenueReportCtrl', revenueReportCtrlFn);
 
-  function booksCtrlFn($location, apiService){
+  function revenueReportCtrlFn($location, apiService){
     var vm = this;
 
-    vm.editBook = editBookFn;
-    vm.toggleRole = toggleRoleFn;
-    vm.createBook = createBookFn;
-    vm.deleteSelected = deleteSelectedFn;
-
-    vm.authors = [];
-    vm.selected = [];
-    vm.allSelected = false;
+    vm.sales = [];
     vm.loading = {};
 
-    getBooksFn();
+    vm.generateRandomData = generateRandomDataFn;
 
-    function getBooksFn(){
-      apiService.getBooks()
-        .then(function(books){
-          vm.books = books;
+    getReportFn();
+
+    function getReportFn(){
+      apiService.getRevenueReportData()
+        .then(function(sales){
+          vm.sales = sales;
         }, function(error){
           console.log(error);
         });
     }
 
-    function editBookFn(bookId){
-      $location.path('/books/' + bookId);
-    }
-
-    function createBookFn(){
-      $location.path('/books/new');
-    }
-
-
-    function toggleRoleFn(idx) {
-      if(vm.allSelected && idx === 'ALL'){
-        vm.allSelected = false;
-        vm.selected = [];
-      }
-      else{
-        if(idx === 'ALL'){
-          vm.selected = vm.books.map(function(book){
-            return book._id;
-          });
-          vm.allSelected = true;
-        }
-        else{
-          if(vm.selected.indexOf(idx) == -1){
-            vm.selected.push(idx);
-          }
-          else{
-            vm.selected.splice(vm.selected.indexOf(idx), 1);
-          }
-        }
-      }
-    }
-
-    function deleteSelectedFn(){
-      vm.loading.delete = true;
-      apiService.deleteSelectedBooks(vm.selected)
+    function generateRandomDataFn(){
+      vm.loading.generate = true;
+      apiService.generateRandomData()
         .then(function(data){
-          vm.loading.delete = false;
-          getBooksFn();
+          vm.loading.generate = false;
+          getReportFn();
         }, function(error){
-          vm.loading.delete = false;
-          console.log(error);
+          vm.loading.generate = false;
+          console.log(error)
         })
     }
 

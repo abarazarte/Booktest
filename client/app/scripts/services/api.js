@@ -14,7 +14,7 @@
     var QUERY_PARAM_SEPARATOR = '&';
     var AUTHORS_BASE_PATH = API_BASE_PATH + 'authors';
     var BOOKS_BASE_PATH = API_BASE_PATH + 'books';
-
+    var REPORTS_BASE_PATH = API_BASE_PATH + 'reports';
 
     return {
       getAuthors: getAuthorsFn,
@@ -27,12 +27,10 @@
       addBook: addBookFn,
       deleteSelectedBooks: deleteSelectedBooksFn,
       getBook: getBookFn,
-      editBook: editBookFn
+      editBook: editBookFn,
+      generateRandomData: generateRandomDataFn,
+      getRevenueReportData: getRevenueReportDataFn
     };
-
-    function getUserIdFromStorageFn(){
-      return store.get('client_token').userId;
-    }
 
     function getTokenFromStorageFn(){
       var token = store.get('client_token');
@@ -174,6 +172,28 @@
         }
       })
         .then(handleSuccess, handleError('Error adding author'));
+    }
+
+    function generateRandomDataFn(){
+      return $http({
+        url: REPORTS_BASE_PATH + URL_SEPARATOR + 'generate',
+        method: 'GET',
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error generating random data'));
+    }
+
+    function getRevenueReportDataFn(){
+      return $http({
+        url: REPORTS_BASE_PATH + URL_SEPARATOR + 'revenue',
+        method: 'GET',
+        headers: {
+          Authorization: getTokenFromStorageFn()
+        }
+      })
+        .then(handleSuccess, handleError('Error getting revenue data'));
     }
 
     function handleSuccess(response){
