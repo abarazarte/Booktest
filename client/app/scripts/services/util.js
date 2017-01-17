@@ -9,7 +9,7 @@
   angular.module('clientApp')
     .service('utilService', utilServiceFn);
 
-  function utilServiceFn($q, store, apiService){
+  function utilServiceFn(store){
     return {
       isLoggedIn: isLoggedInFn,
       toStringDate: toStringDateFn

@@ -1,34 +1,34 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * @ngdoc overview
- * @name clientApp
- * @description
- * # clientApp
- *
- * Main module of the application.
- */
-angular
-  .module('clientApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ui.bootstrap',
-    'angular-storage',
-    'angular-ladda',
-    'config',
-    'daterangepicker'
-  ])
-  .config(function ($routeProvider) {
+  /**
+   * @ngdoc overview
+   * @name clientApp
+   * @description
+   * # clientApp
+   *
+   * Main module of the application.
+   */
+  angular
+    .module('clientApp', [
+      'ngAnimate',
+      'ngCookies',
+      'ngResource',
+      'ngRoute',
+      'ngSanitize',
+      'ngTouch',
+      'ui.bootstrap',
+      'angular-storage',
+      'angular-ladda',
+      'config',
+      'daterangepicker'
+    ])
+    .config(configurationFn)
+    .run(runBlock);
+
+  configurationFn.$inject = ['$routeProvider', '$httpProvider'];
+  function configurationFn($routeProvider,$httpProvider) {
     $routeProvider
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
@@ -70,7 +70,27 @@ angular
         controllerAs: 'vm'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/authors'
       });
+  }
 
-  });
+  runBlock.$inject = ['$rootScope', '$location', 'store', '$http', 'authenticationService', '$timeout'];
+  function runBlock($rootScope, $location, store, $http, authenticationService, $timeout) {
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+
+      var restrictedPage = $location.path() === '/login';
+      var authenticated;
+      if (store.get('client_token')) {
+        if (store.get('client_token').userId) {
+          authenticated = true;
+        }
+      }
+      if (!restrictedPage && !authenticated) {
+        authenticationService.clearCredentials();
+        $timeout(function () {
+          $location.path('/login');
+        }, 100);
+      }
+    });
+  }
+})();

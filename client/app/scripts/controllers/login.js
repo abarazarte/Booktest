@@ -33,7 +33,8 @@
         authenticationService.authenticate(vm.username, vm.password)
           .then(function(data){
             vm.loading.login = false;
-            $location.path('/');
+            $rootScope.loginInProgress = false;
+            $location.path('/authors');
           }, function(error){
             vm.password = '';
             vm.loading.login = false;

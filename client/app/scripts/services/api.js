@@ -34,7 +34,9 @@
 
     function getTokenFromStorageFn(){
       var token = store.get('client_token');
-      return token.tokenType + ' ' + token.token;
+      if(angular.isDefined(token)){
+        return token.tokenType + ' ' + token.token;
+      }
     }
 
     function getAuthorsFn(limit, skip){

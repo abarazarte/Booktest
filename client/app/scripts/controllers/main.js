@@ -22,18 +22,11 @@
     vm.closeLogoutModal = closeLogoutModalFn;
     vm.isLoggedIn = isLoggedInFn;
     vm.changeLocationTo = changeLocationToFn;
+    vm.logout = logoutFn;
 
     function openLogoutModalFn(){
       $('#logout-popup').addClass('animated fadeIn');
       $('#logout-popup').show();
-    }
-
-    function logoutFn(){
-      authenticationService.clearCredentials();
-      $timeout(function(){
-        closeLogoutModalFn();
-        $location.path('/login');
-      }, 100);
     }
 
     function closeLogoutModalFn(){
@@ -48,6 +41,13 @@
 
     function changeLocationToFn(location){
       $location.path(location);
+    }
+
+    function logoutFn(){
+      authenticationService.clearCredentials();
+      $timeout(function(){
+        $location.path('/login');
+      }, 100);
     }
 
   }
