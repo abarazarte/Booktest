@@ -31,16 +31,16 @@
   </div>
 </div>
 <div class="row row-flex authors-list-data" ng-repeat="sale in vm.sales track by $index ">
-  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
+  <div class="col-sm-3 authors-list-column" ng-click="vm.redirectTo('/authors/' + sale._id._id)">
     <span>{{sale._id.firstName + '' + sale._id.lastName}}</span>
   </div>
-  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
+  <div class="col-sm-3 authors-list-column">
     <span>{{sale.count}}</span>
   </div>
-  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
+  <div class="col-sm-3 authors-list-column">
     <span>{{sale.revenue}}</span>
   </div>
-  <div class="col-sm-3 authors-list-column" ng-click="vm.editBook(book._id)">
+  <div class="col-sm-3 authors-list-column">
     <span>{{sale.avg | number : 2}}</span>
   </div>
 </div>

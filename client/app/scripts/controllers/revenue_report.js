@@ -49,8 +49,10 @@
       }
     };
 
+
     vm.generateRandomData = generateRandomDataFn;
     vm.getReport = getReportFn;
+    vm.redirectTo = redirectToFn;
 
     getReportFn();
 
@@ -76,6 +78,10 @@
           vm.loading.generate = false;
           console.log(error)
         })
+    }
+
+    function redirectToFn(location){
+      $location.path(location);
     }
 
   }
