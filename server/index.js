@@ -10,6 +10,7 @@ var authMiddleware = require('./middlewares/auth');
 
 var AuthorCtrl = require('./controllers/authors');
 var BookCtrl = require('./controllers/books');
+var SaleCtrl = require('./controllers/sales');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -62,6 +63,23 @@ books.route('/books/:id')
     .delete(BookCtrl.remove);
 
 app.use('/api/v1', books);
+
+//Books endpoints
+var sales= express.Router();
+sales.route('/generate')
+    .all(authMiddleware.isAuthenticated)
+    .get(SaleCtrl.generateRandom);
+
+sales.route('/revenue')
+    .all(authMiddleware.isAuthenticated)
+    .get(SaleCtrl.findAll);
+
+sales.route('/')
+    .all(authMiddleware.isAuthenticated)
+    .get(SaleCtrl.listSales);
+
+app.use('/api/v1/reports', sales);
+
 
 moongose.connect('mongodb://localhost/nuvector', function(err, res){
   if(err){

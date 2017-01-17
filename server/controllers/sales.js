@@ -2,49 +2,55 @@
  * Created by abarazarte on 16/01/17.
  */
 var mongoose = require('mongoose');
-var Author = require('../models/author');
 var Book = require('../models/book');
 var Sale = require('../models/sales');
 
 //GET - Sales
 exports.findAll = function(req, res){
-    // Sale.aggregate([
-    //     {
-    //         $group: {
-    //             _id: '$book.$authors',  //$region is the column name in collection
-    //             count: {$sum: 1}
-    //         }
-    //     }
-    // ], function (err, result) {
-    //     if (err) {
-    //         next(err);
-    //     } else {
-    //         console.log(result)
-    //     }
-    // });
-    // Sale.find(function(err, sales){
-    //     if(err) res.send(500, err.message);
-    //     console.log('GET /sales');
-    //     Book.populate(sales, { path:'book'}, function(err, sales){
-    //         if(err) res.send(500, err.message);
-    //         Author.populate(sales.book, { path:'book.authors'}, function(err, sales){
-    //             if(err) res.send(500, err.message);
-    //             res.status(200).jsonp(sales);
-    //         });
-    //     });
-    // });
-    Sale.findOne()
-        .populate({
-        path: 'book',
-        // Get friends of friends - populate the 'friends' array for every friend
-        populate: { path: 'authors' }
-        })
-        .exec(function(err, sales){
-            if(err) res.send(500, err.message);
-            res.status(200).jsonp(sales);
-        });
+    Sale.aggregate([
+        {
+            $lookup:
+                {
+                    from: "books",
+                    localField: "book",
+                    foreignField: "_id",
+                    as: "book"
+                }
+        },
+        {$unwind: '$book'},
+        {
+            $lookup:
+                {
+                    from: "authors",
+                    localField: "book.authors",
+                    foreignField: "_id",
+                    as: "book.authors"
+                }
+        },
+        {$unwind: '$book.authors'},
+        {
+            $group : {
+                _id : '$book.authors',
+                revenue: { $sum: '$book.price' },
+                count: { $sum: 1 },
+                avg: { $avg: '$book.price' },
+            }
+        }
+    ], function (err, _sales) {
+        if (err) return res.status(500).send(err.message);
+
+        res.status(200).jsonp(_sales);
+    });
 };
 
+
+exports.listSales = function(req, res){
+  Sale.find(function(err, sales){
+      if (err) return res.status(500).send(err.message);
+
+      res.status(200).send(sales);
+  });
+};
 
 //GET - Generate random data
 exports.generateRandom = function(req, res){
