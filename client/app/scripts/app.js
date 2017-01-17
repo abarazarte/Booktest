@@ -21,7 +21,7 @@ angular
     'angular-ladda',
     'config'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -71,4 +71,6 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+    $locationProvider.html5Mode(true);
   });
