@@ -31,7 +31,6 @@
       apiService.addAuthor(vm.author)
         .then(function(data){
           vm.loading.save = false;
-          console.log(data);
           $location.path('/authors');
       }, function(error){
           vm.loading.save = false;

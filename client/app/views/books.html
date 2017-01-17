@@ -17,7 +17,16 @@
       <span ng-if="!vm.allSelected">Select all</span>
       <span ng-if="vm.allSelected">Deselect all</span>
     </button>
-    <button ladda="vm.loading.delete" data-style="slide-left" type="button" class="btn btn-default" ng-click="vm.deleteSelected()">Delete selected</button>
+    <button ng-if="vm.selected.length > 0" ladda="vm.loading.delete" data-style="slide-left" type="button" class="btn btn-default"
+            mwl-confirm
+            title=""
+            message="Are you sure to delete {{vm.selected.length}} book(s)?"
+            confirm-text="Yes"
+            cancel-text="No"
+            on-confirm="vm.deleteSelected()"
+            on-cancel="vm.cancelDeleteSelected()"
+            confirm-button-type="danger"
+            cancel-button-type="default">Delete selected</button>
   </div>
 </div>
 

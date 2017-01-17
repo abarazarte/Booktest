@@ -10,7 +10,10 @@ var bookSchema = new Schema({
     },
     publicationDate: Date,
     publisher: String,
-    price: Number
+    price: Number,
+    status: { type: String, enum:
+        ['OK', 'ARCHIVED'], default: 'OK'
+    }
 });
 
 module.exports = mongoose.model('Book', bookSchema);

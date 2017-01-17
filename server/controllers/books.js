@@ -96,7 +96,6 @@ exports.update = function(req, res){
 exports.remove = function(req, res){
     Book.findById(req.params.id, function(err, _book){
         if(err) return res.status(404).send(err.message);
-
         _book.remove(function(err){
             if(err) return res.status(500).send(err.message);
 

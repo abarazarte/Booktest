@@ -21,12 +21,13 @@
     vm.toggleRole = toggleRoleFn;
     vm.createBook = createBookFn;
     vm.deleteSelected = deleteSelectedFn;
+    vm.cancelDeleteSelected = cancelDeleteSelectedFn;
 
     vm.authors = [];
     vm.books = [];
     vm.totalBooks = 0;
     vm.controls = {
-      numPerPage: 2,
+      numPerPage: 10,
       currentPage: 1
     };
     vm.selected = [];
@@ -94,6 +95,11 @@
           console.log(error);
         })
     }
+    function cancelDeleteSelectedFn(){
+      vm.selected = [];
+      vm.allSelected = false;
+    }
+
 
   }
 

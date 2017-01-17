@@ -21,7 +21,8 @@
       'angular-storage',
       'angular-ladda',
       'config',
-      'daterangepicker'
+      'daterangepicker',
+      'mwl.confirm'
     ])
     .config(configurationFn)
     .run(runBlock);

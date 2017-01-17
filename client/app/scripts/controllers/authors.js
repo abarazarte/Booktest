@@ -21,6 +21,7 @@
       vm.toggleRole = toggleRoleFn;
       vm.createAuthor = createAuthorFn;
       vm.deleteSelected = deleteSelectedFn;
+      vm.cancelDeleteSelected = cancelDeleteSelectedFn;
 
       vm.authors = [];
       vm.totalAuthors = 0;
@@ -94,6 +95,11 @@
             vm.loading.delete = false;
             console.log(error);
           })
+      }
+
+      function cancelDeleteSelectedFn(){
+        vm.selected = [];
+        vm.allSelected = false;
       }
 
     }

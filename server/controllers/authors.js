@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Author = require('../models/author');
+var Book = require('../models/book');
 
 //GET - Return all authors
 exports.findAll = function(req, res){
@@ -8,7 +9,7 @@ exports.findAll = function(req, res){
 
   Author.count(function(err, _count) {
     if(err) return res.status(500).send(err.message);
-    Author.find()
+    Author.find({ status: 'OK'})
         .skip(_skip)
         .limit(_limit)
         .exec(function(err, authors){
@@ -80,10 +81,16 @@ exports.remove = function(req, res){
   Author.findById(req.params.id, function(err, author){
     if(err) return res.status(404).send(err.message);
 
-    author.remove(function(err){
-      if(err) return res.status(500).send(err.message);
+    Book.find({authors: {$elemMatch: author._id }}, function(err, books){
+      if(err) return res.status(404).send(err.message);
+      books.map(function(book){
+        book.authors.remove(author._id);
 
-      res.status(200).send();
+      });
+      author.remove(function(err){
+        if(err) return res.status(500).send(err.message);
+        res.status(200).send();
+      });
     });
   });
 };
