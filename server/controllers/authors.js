@@ -9,7 +9,7 @@ exports.findAll = function(req, res){
 
   Author.count(function(err, _count) {
     if(err) return res.status(500).send(err.message);
-    Author.find({ status: 'OK'})
+    Author.find()
         .skip(_skip)
         .limit(_limit)
         .exec(function(err, authors){
