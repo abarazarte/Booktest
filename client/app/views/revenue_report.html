@@ -2,18 +2,17 @@
   <div class="col-sm-9">
     <div class="form-inline">
       <div class="form-group">
-        <label for="from">From</label>
-        <input type="date" class="form-control" id="from" ng-model="vm.from" placeholder="">
+        <p class="input-group date-box has-feedback">
+          <input date-range-picker class="form-control date-picker font-11 inside-search-icon" type="text"
+                 ng-model="vm.filter.date" options="vm.filter.date.opts" required/>
+          <i class="glyphicon glyphicon-calendar form-control-feedback no-zindex"></i>
+        </p>
       </div>
-      <div class="form-group">
-        <label for="to">To:</label>
-        <input type="date" class="form-control" id="to" ng-model="vm.to" placeholder="">
-      </div>
-      <button type="button" class="btn btn-default">Find</button>
+      <button ladda="vm.loading.report" data-style="slide-left" type="button" class="btn btn-default" ng-click="vm.getReport()">Find</button>
     </div>
   </div>
   <div class="col-sm-3">
-    <button type="button" class="btn btn-default" ng-click="vm.generateRandomData()">Generate randoms sales</button>
+    <button ladda="vm.loading.generate" data-style="slide-left" type="button" class="btn btn-default" ng-click="vm.generateRandomData()">Generate randoms sales</button>
   </div>
 </div>
 

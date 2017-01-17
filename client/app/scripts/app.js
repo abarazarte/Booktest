@@ -19,7 +19,8 @@ angular
     'ui.bootstrap',
     'angular-storage',
     'angular-ladda',
-    'config'
+    'config',
+    'daterangepicker'
   ])
   .config(function ($routeProvider) {
     $routeProvider

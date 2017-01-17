@@ -7,7 +7,11 @@ var Sale = require('../models/sales');
 
 //GET - Sales
 exports.findAll = function(req, res){
+    var _from =  new Date(req.query.from * 1000);
+    var _to = new Date(req.query.to * 1000);
+
     Sale.aggregate([
+        { $match: {  date: { $gte: _from, $lte: _to } }  },
         {$unwind: '$book'},
         {
             $lookup:

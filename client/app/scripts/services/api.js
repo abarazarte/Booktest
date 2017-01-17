@@ -206,9 +206,18 @@
         .then(handleSuccess, handleError('Error generating random data'));
     }
 
-    function getRevenueReportDataFn(){
+    function getRevenueReportDataFn(from, to){
+      var url = REPORTS_BASE_PATH + URL_SEPARATOR + 'revenue?';
+
+      if(angular.isDefined(from)){
+        url += 'from=' + from + QUERY_PARAM_SEPARATOR;
+      }
+      if(angular.isDefined(to)){
+        url += 'to=' + to + QUERY_PARAM_SEPARATOR;
+      }
+
       return $http({
-        url: REPORTS_BASE_PATH + URL_SEPARATOR + 'revenue',
+        url: url,
         method: 'GET',
         headers: {
           Authorization: getTokenFromStorageFn()

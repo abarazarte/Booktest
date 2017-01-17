@@ -12,7 +12,9 @@
     "angular-touch": "^1.4.0",
     "angular-bootstrap": "~0.13.3",
     "a0-angular-storage": "~0.0.13",
-    "angular-ladda": "~0.3.4"
+    "angular-ladda": "~0.3.4",
+    "moment": "~2.10.6",
+    "angular-daterangepicker": "~0.2.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
