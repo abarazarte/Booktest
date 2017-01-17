@@ -36,23 +36,25 @@
     <span>Phone</span>
   </div>
 </div>
-<div class="row row-flex authors-list-data" ng-repeat="author in vm.authors | filter:vm.searchText track by $index ">
-  <div class="col-sm-1">
+<div class="authors-data">
+  <div class="row row-flex authors-list-data" ng-repeat="author in vm.authors | filter:vm.searchText track by $index ">
+    <div class="col-sm-1">
     <span>
       <input type="checkbox" ng-click="vm.toggleRole(author._id)" ng-checked="vm.selected.indexOf(author._id) > -1" aria-label="...">
     </span>
-  </div>
-  <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
-    <span>{{author.firstName + ' ' + author.lastName}}</span>
-  </div>
-  <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
-    <span>{{author.city}}</span>
-  </div>
-  <div class="col-sm-2 authors-list-column" ng-click="vm.editAuthor(author._id)">
-    <span>{{author.state}}</span>
-  </div>
-  <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
-    <span>{{author.phone}}</span>
+    </div>
+    <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
+      <span>{{author.firstName + ' ' + author.lastName}}</span>
+    </div>
+    <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
+      <span>{{author.city}}</span>
+    </div>
+    <div class="col-sm-2 authors-list-column" ng-click="vm.editAuthor(author._id)">
+      <span>{{author.state}}</span>
+    </div>
+    <div class="col-sm-3 authors-list-column" ng-click="vm.editAuthor(author._id)">
+      <span>{{author.phone}}</span>
+    </div>
   </div>
 </div>
 
