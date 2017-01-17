@@ -37,9 +37,20 @@
       return token.tokenType + ' ' + token.token;
     }
 
-    function getAuthorsFn(){
+    function getAuthorsFn(limit, skip){
+      var url = AUTHORS_BASE_PATH + '?';
+
+      if(angular.isDefined(skip)){
+        url += 'skip=' + skip * limit + QUERY_PARAM_SEPARATOR;
+      }
+
+      if(angular.isDefined(limit)){
+        url += 'limit=' + limit + QUERY_PARAM_SEPARATOR;
+      }
+
+
       return $http({
-        url: AUTHORS_BASE_PATH,
+        url: url,
         method: 'GET',
         headers: {
           Authorization: getTokenFromStorageFn()
@@ -111,9 +122,19 @@
         .then(handleSuccess, handleError('Error adding book'));
     }
 
-    function getBooksFn(){
+    function getBooksFn(limit, skip){
+      var url = BOOKS_BASE_PATH + '?';
+
+      if(angular.isDefined(skip)){
+        url += 'skip=' + skip * limit + QUERY_PARAM_SEPARATOR;
+      }
+
+      if(angular.isDefined(limit)){
+        url += 'limit=' + limit + QUERY_PARAM_SEPARATOR;
+      }
+
       return $http({
-        url: BOOKS_BASE_PATH,
+        url: url,
         method: 'GET',
         headers: {
           Authorization: getTokenFromStorageFn()

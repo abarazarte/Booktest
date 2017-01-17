@@ -29,7 +29,6 @@
     getGenresFn();
     getAuthorsFn();
 
-
     function cancelFn(){
       $location.path('/books');
     }
@@ -39,7 +38,6 @@
       apiService.addBook(vm.book)
         .then(function(data){
           vm.loading.save = false;
-          console.log(data);
           $location.path('/books');
         }, function(error){
           vm.loading.save = false;
@@ -58,8 +56,8 @@
 
     function getAuthorsFn(){
       apiService.getAuthors()
-        .then(function(data){
-          vm.authors = data;
+        .then(function(response){
+          vm.authors = response.data;
         }, function(error){
           console.log(error);
         });

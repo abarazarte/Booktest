@@ -14,7 +14,7 @@
   angular.module('clientApp')
     .controller('BooksCtrl', booksCtrlFn);
 
-  function booksCtrlFn($location, apiService){
+  function booksCtrlFn($scope, $location, apiService){
     var vm = this;
 
     vm.editBook = editBookFn;
@@ -23,16 +23,29 @@
     vm.deleteSelected = deleteSelectedFn;
 
     vm.authors = [];
+    vm.books = [];
+    vm.totalBooks = 0;
+    vm.controls = {
+      numPerPage: 2,
+      currentPage: 1
+    };
     vm.selected = [];
     vm.allSelected = false;
     vm.loading = {};
 
     getBooksFn();
 
+    $scope.$watch('vm.controls.currentPage', function(newVal, oldVal){
+      if(newVal !== oldVal){
+        getBooksFn();
+      }
+    });
+
     function getBooksFn(){
-      apiService.getBooks()
-        .then(function(books){
-          vm.books = books;
+      apiService.getBooks(vm.controls.numPerPage, vm.controls.currentPage- 1)
+        .then(function(response){
+          vm.books = response.data;
+          vm.totalBooks = response.total;
         }, function(error){
           console.log(error);
         });

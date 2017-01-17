@@ -14,7 +14,7 @@
   angular.module('clientApp')
     .controller('AuthorsCtrl', authorsCtrlFn);
 
-    function authorsCtrlFn($location, apiService){
+    function authorsCtrlFn($scope, $location, apiService){
       var vm = this;
 
       vm.editAuthor = editAuthorFn;
@@ -23,16 +23,29 @@
       vm.deleteSelected = deleteSelectedFn;
 
       vm.authors = [];
+      vm.totalAuthors = 0;
+      vm.controls = {
+        numPerPage: 10,
+        currentPage: 1
+      };
       vm.selected = [];
       vm.allSelected = false;
       vm.loading = {};
 
       getAuthorsFn();
 
+      $scope.$watch('vm.controls.currentPage', function(newVal, oldVal){
+        if(newVal !== oldVal){
+          getAuthorsFn();
+        }
+      });
+
+
       function getAuthorsFn(){
-        apiService.getAuthors()
-          .then(function(data){
-            vm.authors = data;
+        apiService.getAuthors(vm.controls.numPerPage, vm.controls.currentPage- 1)
+          .then(function(response){
+            vm.authors = response.data;
+            vm.totalAuthors = response.total;
           }, function(error){
             console.log(error);
           });

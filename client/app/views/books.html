@@ -51,3 +51,12 @@
     <span>{{book.publicationDate | date:'MM/dd/yyyy'}}</span>
   </div>
 </div>
+
+<div class="row row-separation">
+  <div class="col-sm-12 text-center">
+    <pagination total-items="vm.totalBooks"
+                ng-model="vm.controls.currentPage"
+                max-size="5" class="pagination-sm" boundary-links="true" rotate="false"
+                items-per-page="vm.controls.numPerPage"></pagination>
+  </div>
+</div>

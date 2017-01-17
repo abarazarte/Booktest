@@ -55,3 +55,12 @@
     <span>{{author.phone}}</span>
   </div>
 </div>
+
+<div class="row row-separation">
+  <div class="col-sm-12 text-center">
+    <pagination total-items="vm.totalAuthors"
+                ng-model="vm.controls.currentPage"
+                max-size="5" class="pagination-sm" boundary-links="true" rotate="false"
+                items-per-page="vm.controls.numPerPage"></pagination>
+  </div>
+</div>

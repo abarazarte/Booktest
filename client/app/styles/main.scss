@@ -161,13 +161,7 @@ body {
     border-right: 1px solid #666;
   }
   &:last-child{
-    .authors-list-column:first-child{
-      border-bottom: 1px solid #666;
-    }
     .authors-list-column{
-      border-bottom: 1px solid #666;
-    }
-    .authors-list-column:last-child{
       border-bottom: 1px solid #666;
     }
   }

@@ -76,8 +76,8 @@
 
     function getAuthorsFn(){
       apiService.getAuthors()
-        .then(function(data){
-          vm.authors = data;
+        .then(function(response){
+          vm.authors = response.data;
         }, function(error){
           console.log(error);
         });

@@ -3,10 +3,25 @@ var Author = require('../models/author');
 
 //GET - Return all authors
 exports.findAll = function(req, res){
-  Author.find(function(err, authors){
-    if(err) res.send(500, err.message);
-    console.log('GET /authors');
-    res.status(200).jsonp(authors);
+  var _skip = req.query.skip;
+  var _limit = req.query.limit;
+
+  Author.count(function(err, _count) {
+    if(err) return res.status(500).send(err.message);
+    Author.find()
+        .skip(_skip)
+        .limit(_limit)
+        .exec(function(err, authors){
+          if(err) res.send(500, err.message);
+          console.log('GET /authors');
+          var tmp = {
+            total: _count,
+            skip: _skip,
+            limit: _limit,
+            data: authors
+          };
+          res.status(200).jsonp(tmp);
+        });
   });
 };
 

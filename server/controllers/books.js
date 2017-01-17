@@ -10,14 +10,31 @@ exports.getGenres = function(req, res){
 
 // GET - Return all books
 exports.findAll = function(req, res){
-    Book.find(function(err, books){
-        if(err) res.send(500, err.message);
-        console.log('GET /books');
-        Author.populate(books, { path:'authors'}, function(err, books){
-            if(err) res.send(500, err.message);
-            res.status(200).jsonp(books);
-        });
+    var _skip = req.query.skip;
+    var _limit = req.query.limit;
+
+    Book.count(function(err, _count){
+        if(err) return res.status(500).send(err.message);
+        Book.find()
+            .skip(_skip)
+            .limit(_limit)
+            .exec(function(err, books){
+                if(err) res.send(500, err.message);
+                console.log('GET /books');
+                Author.populate(books, { path:'authors'}, function(err, books){
+                    if(err) res.send(500, err.message);
+                    var tmp = {
+                        total: _count,
+                        skip: _skip,
+                        limit: _limit,
+                        data: books
+                    };
+                    res.status(200).jsonp(tmp);
+                });
+            });
     });
+
+
 };
 
 // GET - Return a book by id
@@ -32,15 +49,6 @@ exports.find = function(req, res){
                 res.status(200).jsonp(book);
             });
         });
-
-    // Book.findById(req.params.id, function(err, book){
-    //     if(err) return res.status(404).send(err.message);
-    //     console.log('GET /books/' + req.params.id);
-    //     Author.populate(book, { path:'authors'}, function(err, book){
-    //         if(err) res.send(500, err.message);
-    //         res.status(200).jsonp(book);
-    //     });
-    // });
 };
 
 //POST - Insert a new Book in the DB
